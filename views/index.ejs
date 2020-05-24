@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Appointer</title>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="Az.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example" aria-expanded="false">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a href="#" class="navbar-brand">Appointer</a>
+</div>
+<div class="collapse navbar-collapse" id="bs-example">
+<ul class="nav navbar-nav">
+<li><a href="/">Home</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div>
+</div>
+</nav>
+
+<% if(details!=null) { %>
+<table style='width:40%; margin-left:20%;'>
+<tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Date </th>
+</tr>
+<% details.forEach(function(res2){ %>
+<tr>
+    <td><%= res2.name%></td>
+    <td><%= res2.phone %></td>
+    <td><%= res2.email%></td>
+    <td><%= res2.date %></td>
+
+</tr>
+<% }) %>
+</table>
+<% } %>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Basic initialization</title>
+	<link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.css">
+	<script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
+
+	<style>
+		html,
+		body {
+			margin: 0px;
+			padding: 0px;
+			height: 100%;
+			overflow: hidden;
+		}
+	</style>
+	<script>
+		function init() {
+			scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+			scheduler.init("scheduler_here", new Date(2020, 5, 20), "month");
+			// enables the dynamic loading
+			scheduler.setLoadMode("day");
+
+			// load data from backend
+			scheduler.load("/data", "json");
+			// connect backend to scheduler
+			var dp = new dataProcessor("/data");
+			// set data exchange mode
+			dp.init(scheduler);
+			dp.setTransactionMode("POST", false);
+		}
+	</script>
+</head>
+
+<body onload="init();">
+	<div id="scheduler_here" class="dhx_cal_container" style='width:40%; margin-left:20%;margin-top:10%; height:50%;'>
+		<div class="dhx_cal_navline">
+			<div class="dhx_cal_prev_button">&nbsp;</div>
+			<div class="dhx_cal_next_button">&nbsp;</div>
+			<div class="dhx_cal_today_button"></div>
+			<div class="dhx_cal_date"></div>
+			<div class="dhx_cal_tab" name="day_tab"></div>
+			<div class="dhx_cal_tab" name="week_tab"></div>
+			<div class="dhx_cal_tab" name="month_tab"></div>
+		</div>
+		<div class="dhx_cal_header">
+		</div>
+		<div class="dhx_cal_data">
+		</div>
+	</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
